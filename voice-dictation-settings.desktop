@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Voice Dictation Settings
+Comment=Configure voice dictation and coding assistant settings
+Exec=bash -c "cd /run/media/zebratic/HDD_DATA/Work/hold-for-ai && npm run settings;"
+Icon=microphone
+Terminal=false
+Categories=Settings;Accessibility;
+StartupNotify=true
+Keywords=voice;dictation;speech;settings;configuration;
+MimeType=

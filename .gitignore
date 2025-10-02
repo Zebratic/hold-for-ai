@@ -128,3 +128,17 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Environment variables
+.env
+
+# Temporary files
+temp_recording.wav
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db

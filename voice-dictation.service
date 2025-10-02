@@ -1,0 +1,28 @@
+[Unit]
+Description=Voice Dictation Service
+Documentation=file:///run/media/zebratic/HDD_DATA/Work/hold-for-ai/README.md
+After=graphical-session.target
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+Environment=WAYLAND_DISPLAY=wayland-0
+Environment=XDG_SESSION_TYPE=wayland
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node /run/media/zebratic/HDD_DATA/Work/hold-for-ai/src/service.js
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=false
+ReadWritePaths=%h/.config/voice-dictation
+ReadWritePaths=/tmp
+
+[Install]
+WantedBy=default.target

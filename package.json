@@ -1,0 +1,30 @@
+{
+  "name": "hold-for-ai",
+  "version": "1.0.0",
+  "description": "Voice-activated speech-to-text with OpenAI integration",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "settings": "node src/settings-cli.js",
+    "settings-gui": "electron src/electron-main.js",
+    "settings-gui-old": "node src/settings-gui.js",
+    "service": "node src/service.js",
+    "install": "./install.sh",
+    "dictation": "node src/dictation.js",
+    "dictation-manual": "node src/dictation.js --manual",
+    "dictation-coding": "node src/dictation.js --coding",
+    "dictation-coding-manual": "node src/dictation.js --coding --manual"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "node-gtk": "^0.14.0",
+    "node-record-lpcm16": "^1.0.1",
+    "openai": "^4.28.0"
+  },
+  "devDependencies": {
+    "electron": "^38.1.0"
+  }
+}

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Dictation Settings</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .section h3 {
+            margin-top: 0;
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .service-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .status-indicator.running {
+            background: #27ae60;
+        }
+
+        .status-indicator.stopped {
+            background: #e74c3c;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎤 Voice Dictation Settings</h1>
+
+        <div class="section">
+            <h3>🔧 Basic Settings</h3>
+
+            <div class="form-group">
+                <label for="mode">Operating Mode:</label>
+                <select id="mode">
+                    <option value="typing">Typing Mode (Direct text input)</option>
+                    <option value="coding">Coding Mode (Claude Code integration)</option>
+                </select>
+                <div class="help-text">Choose how voice input should be processed</div>
+            </div>
+
+            <div class="form-group">
+                <label for="hotkey">Hotkey Combination:</label>
+                <input type="text" id="hotkey" placeholder="ctrl+space">
+                <div class="help-text">Global hotkey to trigger recording (Wayland uses file trigger)</div>
+            </div>
+
+            <div class="form-group">
+                <label for="whisperModel">Whisper Model:</label>
+                <select id="whisperModel">
+                    <option value="tiny.en">tiny.en (Fastest, lower accuracy)</option>
+                    <option value="base.en">base.en (Balanced)</option>
+                    <option value="small.en">small.en (Better accuracy)</option>
+                    <option value="medium.en">medium.en (High accuracy)</option>
+                    <option value="large">large (Best accuracy, slower)</option>
+                </select>
+                <div class="help-text">Select the Whisper model for speech recognition</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🤖 Coding Mode Settings</h3>
+
+            <div class="form-group">
+                <label for="codingPath">Project Directory:</label>
+                <input type="text" id="codingPath" placeholder="/path/to/your/project">
+                <div class="help-text">Directory where Claude Code should run</div>
+            </div>
+
+            <div class="form-group">
+                <label for="claudeCodePath">Claude Code Path:</label>
+                <input type="text" id="claudeCodePath" placeholder="claude-code">
+                <div class="help-text">Path to claude-code CLI binary</div>
+            </div>
+
+            <div class="form-group">
+                <label for="systemPrompt">System Prompt:</label>
+                <textarea id="systemPrompt" rows="3" placeholder="Optional system prompt to prepend to voice requests"></textarea>
+                <div class="help-text">Custom instructions for Claude Code (optional)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>⚙️ Advanced Settings</h3>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="showNotifications">
+                <label for="showNotifications">Show desktop notifications</label>
+            </div>
+
+            <div class="form-group">
+                <label for="typingDelay">Typing Delay (ms):</label>
+                <input type="number" id="typingDelay" min="0" max="1000" step="10">
+                <div class="help-text">Delay between keystrokes when typing text</div>
+            </div>
+
+            <div class="form-group">
+                <label for="audioSampleRate">Audio Sample Rate:</label>
+                <input type="number" id="audioSampleRate" value="16000">
+                <div class="help-text">Audio recording sample rate (Hz)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎛️ Service Control</h3>
+
+            <div class="service-status">
+                <span class="status-indicator stopped" id="serviceIndicator"></span>
+                <span id="serviceStatus">Checking service status...</span>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-success" onclick="controlService('start')">Start Service</button>
+                <button class="btn-warning" onclick="controlService('restart')">Restart Service</button>
+                <button class="btn-danger" onclick="controlService('stop')">Stop Service</button>
+                <button class="btn-primary" onclick="controlService('reload')">Reload Config</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🧪 Testing</h3>
+
+            <div class="button-group">
+                <button class="btn-primary" onclick="testTrigger()">Test Voice Trigger</button>
+                <button class="btn-primary" onclick="refreshStatus()">Refresh Status</button>
+            </div>
+
+            <div id="testResults"></div>
+        </div>
+
+        <div class="section">
+            <div class="button-group">
+                <button class="btn-success" onclick="saveSettings()">Save Settings</button>
+                <button class="btn-warning" onclick="loadSettings()">Reload Settings</button>
+                <button class="btn-danger" onclick="resetSettings()">Reset to Defaults</button>
+            </div>
+
+            <div id="statusMessage"></div>
+        </div>
+    </div>
+
+    <script src="settings-gui-electron.js"></script>
+</body>
+</html>
